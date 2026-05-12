@@ -1,6 +1,7 @@
 import React, { Suspense, use, useEffect, useState } from 'react'
 import Bottle from './Bottle';
-import { getCart, saveCart } from '../localstorge/localstorge';
+import { getCart, removeCart, saveCart } from '../localstorge/localstorge';
+import Cart from './Cart';
 
 function Bottles({ promisData }) {
     const bottlesData = use(promisData);
@@ -18,16 +19,27 @@ function Bottles({ promisData }) {
     const handeleCard = (bottle) => {
         const newCard = [...card, bottle];
         setCart(newCard);
-        saveCart(bottle.id)
+        saveCart(bottle.id);
     }
-    // console.log(bottlesData)
+
+    const removeHandle = (id) => {
+        const remaning = card.filter(bottle => bottle.id !== id);
+        setCart(remaning);
+        removeCart(id);
+    }
     return (
         <>
             <Suspense fallback={<p> Data is Loading.........</p>}>
-                <div>
-                    <h1>All Bottles buying link here</h1>
+                <div
+                    style={{ width: "80%", margin: "auto auto" }}>
+                    <h1>Total Stock Bottle : {bottlesData.length}</h1>
                     <h3>Card : {card.length}</h3>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "10px" }} >
+                    <Cart
+                        cart={card}
+                        removeHandle={removeHandle}
+                    ></Cart>
+                    <div
+                        style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "10px" }} >
                         {bottlesData.map((bottle => <Bottle
                             key={bottle.id}
                             bottle={bottle}

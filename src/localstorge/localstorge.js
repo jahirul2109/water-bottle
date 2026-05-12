@@ -13,9 +13,17 @@ const saveCart = (bottleID)=> {
     setLsCart(cart);
 };
 
+const removeCart = (id)=> {
+    const shoretdIds = getCart();
+    const shored = [];
+    const remaning = shoretdIds.filter(bottle => bottle !== id);
+    setLsCart(remaning)
+    
+}
+
 const setLsCart = (cart) => {
     const cartStinified = JSON.stringify(cart);
     localStorage.setItem('cart', cartStinified)
 }
 
-export {getCart, setLsCart  , saveCart};
+export {getCart, setLsCart  , saveCart , removeCart};

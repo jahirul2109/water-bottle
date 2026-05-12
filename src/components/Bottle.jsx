@@ -2,7 +2,6 @@ import React from 'react'
 
 function Bottle({bottle , handeleCard}) {
     const {img , id , name , price , stock , seller} = bottle ;
-    console.log(bottle)
 
     // css 
     const style = {
@@ -13,10 +12,10 @@ function Bottle({bottle , handeleCard}) {
   return (
     <div style={style}>
         <img  src= {bottle.img} style={{width : "100%"}} alt= {img} />
-        <h3>Name {name} </h3> 
+        <h3>Name : {name} </h3> 
         <h4> Price : ${price}</h4>
         <p>Vandor : {seller}</p>
-        <p>Remaing only{stock} pice</p>
+        <p>Remaining only{stock} pice</p>
         <button onClick={()=> handeleCard(bottle)} >Buy Now</button>
     </div>
   )
